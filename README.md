@@ -38,16 +38,16 @@ Steps:
 
 1. Get stock marketGET https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM&apikey=demo
 2. Then validate :
-    . Status code is equal to 200
-    . Validate the json schema
-    . Validate the response time is less than 1 second
+   1. Status code is equal to 200 
+   2. Validate the json schema 
+   3. Validate the response time is less than 1 second
 
 **Negative test case:** Get raw daily time series without api key
 
 1. GET https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=IBM 
 2. Then validate :
-      . Status code is equal to 200
-      . Validate the error message of missing api key
-      . Validate the response time is less than 1 second
+   1. Status code is equal to 200 
+   2. Validate the error message of missing api key 
+   3. Validate the response time is less than 1 second
 
 
