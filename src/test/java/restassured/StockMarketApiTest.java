@@ -14,23 +14,23 @@ public class RestApiTest extends BaseTest {
 
     @Test
     void testGetStockSuccessfully_function_TIME_SERIES_DAIL() {
-        String symbol = "IBM";
-        String function = "TIME_SERIES_DAILY";
+        String IBMSymbol = "IBM";
+        String DailyFunction = "TIME_SERIES_DAILY";
         String symbolJsonPath = "'Meta Data'.'2. Symbol'";
         InputStream getStockJsonSchema = getClass ().getClassLoader ()
-                .getResourceAsStream ("json-format/get-stock-validator.json");
+                .getResourceAsStream ("json-schemas/get-stock-validator.json");
 
         given()
                 .spec(requestSpecification)
         .when()
-                .queryParam("function", function)
-                .queryParam("symbol", symbol)
+                .queryParam("function", DailyFunction)
+                .queryParam("symbol", IBMSymbol)
                 .get("query")
         .then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)
                 .body(JsonSchemaValidator.matchesJsonSchema(getStockJsonSchema))
-                .body(symbolJsonPath, is(equalTo(symbol)))
+                .body(symbolJsonPath, is(equalTo(IBMSymbol)))
                 .time(lessThan(1000L));
     }
 
@@ -42,12 +42,12 @@ public class RestApiTest extends BaseTest {
 
         given()
                 .spec(requestSpecification)
-                .when()
+        .when()
                 .queryParam("function", function)
                 .queryParam("symbol", symbol)
                 .queryParam("apikey", "")
                 .get("query")
-                .then()
+        .then()
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)
                 .time(lessThan(1000L))
